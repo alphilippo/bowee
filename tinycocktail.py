@@ -62,6 +62,12 @@ def generate_files(name):
 def create_template_dir(name):
     os.mkdir(os.path.join(name,'templates'))
     return os.path.join(name,'templates')
+
+def args_error():
+    print "Usage : \n"
+    for opt in __OPTIONS__ :
+        print "./manage.py %s " %(opt,)
+    return None
     
 if __name__ == '__main__':
     print sys.argv
@@ -69,20 +75,13 @@ if __name__ == '__main__':
         if sys.argv[1] == 'createproject':
             if sys.argv[1] :
                 name = create_project_dir(sys.argv[2])
-                #name = os.path.join(__PROJECT_DIR__,sys.argv[2])
-                print name
-                print __PROJECT_DIR__
                 project = generate_files(name)
                 template = create_template_dir(name)
             else :
                 print "Usage : createproject projectname"
         else :
-            print "Usage : "
-            for opt in __OPTIONS__ :
-                print "./manage.py %s " %(opt,)
+            args_error()
     elif len(sys.argv) == 2 and sys.argv[1] == 'syncdb' :
         print syncdb()
     else :
-        print "Usage : \n"
-        for opt in __OPTIONS__ :
-            print "./manage.py %s " %(opt,)
+        args_error()
