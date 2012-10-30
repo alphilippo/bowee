@@ -2,21 +2,13 @@ import sys
 import os.path
 
 __PROJECT_DIR__ = os.getcwd()
-__PROJECT_FILES__ = ['views.py','models.py']
-__OPTIONS__ = ['createproject','syncdb']
 
-def syncdb(dbname=None):
-    try :
-        import models
-    
-        models.create_tables()
-        return "tables successfully created"
-    except ImportError :
-        return "File models.py doesn't exist "
-        
-def create_project_dir(name): 
-    os.mkdir(os.path.join(__PROJECT_DIR__,name))
-    return os.path.join(__PROJECT_DIR__,name)
+__DIRS__ = [
+    'templates',
+    'static_files'
+]
+
+__OPTIONS__ = ['createproject','syncdb']
 
 def get_auto_model():
     auto = '''import peewee
@@ -43,34 +35,54 @@ import peewee
 #create your views 
 '''
     return auto
+
+__PROJECT_FILES__ = [
+    ('views.py',get_auto_view()),
+    ('models.py',get_auto_model()),
+    ('__init__.py',''),]
+
+#PROJECT BUILDER
+        
+def create_project_dir(name): 
+    os.mkdir(os.path.join(__PROJECT_DIR__,name))
+    return os.path.join(__PROJECT_DIR__,name)
+
     
 def generate_files(name):
     print "Generating project files"
     for filename in __PROJECT_FILES__ :
-        if filename == 'views.py' :
-            filename = os.path.join(name,filename)
-            f = open(filename,'w+')
-            f.write(get_auto_view())
-            f.close()
-        else :
-            filename = os.path.join(name,filename)
-            f = open(filename,'w+')
-            f.write(get_auto_model())
+        fname = os.path.join(name,filename[0])
+        with open(fname,'w+') as f :
+            f.write(filename[1])
             f.close()
     return True
 
 def create_template_dir(name):
-    os.mkdir(os.path.join(name,'templates'))
-    return os.path.join(name,'templates')
+    for directory in __DIRS__ :
+        os.mkdir(os.path.join(name,directory))
+    return True
+
+#ORM MANAGER
+    
+def syncdb(dbname=None):
+    try :
+        import models
+        models.create_tables()
+        return "tables successfully created"
+    except ImportError :
+        return "File models.py doesn't exist "
+
+#ERROR HANDLER        
 
 def args_error():
-    print "Usage : \n"
-    for opt in __OPTIONS__ :
-        print "./manage.py %s " %(opt,)
+    print "Usage : "
+    print "\t options : %s " %(__OPTIONS__,)
+    print "\t python manage.py option [target]"
     return None
+
+#MAIN
     
 if __name__ == '__main__':
-    print sys.argv
     if len(sys.argv) > 2 :
         if sys.argv[1] == 'createproject':
             if sys.argv[1] :
