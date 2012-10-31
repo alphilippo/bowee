@@ -1,5 +1,7 @@
 import sys
 import os.path
+from subprocess import call
+import pdb
 
 __PROJECT_DIR__ = os.getcwd()
 
@@ -8,7 +10,7 @@ __DIRS__ = [
     'static_files'
 ]
 
-__OPTIONS__ = ['createproject','syncdb']
+__OPTIONS__ = ['createproject','syncdb','run']
 
 def get_auto_model():
     auto = '''import peewee
@@ -62,6 +64,14 @@ def create_template_dir(name):
         os.mkdir(os.path.join(name,directory))
     return True
 
+#RUN SERVER
+
+def run(name='views.py'):
+    try :
+        call(['python',name]) 
+    except :
+        pass
+    
 #ORM MANAGER
     
 def syncdb(dbname=None):
@@ -83,17 +93,21 @@ def args_error():
 #MAIN
     
 if __name__ == '__main__':
-    if len(sys.argv) > 2 :
-        if sys.argv[1] == 'createproject':
-            if sys.argv[1] :
-                name = create_project_dir(sys.argv[2])
-                project = generate_files(name)
-                template = create_template_dir(name)
-            else :
-                print "Usage : createproject projectname"
-        else :
-            args_error()
+    #pdb.set_trace()
+    if len(sys.argv) >= 2 and sys.argv[1] == 'createproject' :
+        try :
+            name = create_project_dir(sys.argv[2])
+            project = generate_files(name)
+            template = create_template_dir(name)
+        except :
+            print "Usage : createproject projectname"
     elif len(sys.argv) == 2 and sys.argv[1] == 'syncdb' :
         print syncdb()
+    elif len(sys.argv) >= 2 and sys.argv[1] == 'run' :
+        if len(sys.argv) == 2 :
+            run()
+        else:
+            run(sys.argv[2])
     else :
         args_error()
+        
