@@ -1,3 +1,5 @@
+#!/bin/python
+
 import sys
 import os.path
 from subprocess import call
@@ -20,7 +22,7 @@ def get_auto_model():
 #database = peewee.SqliteDatabase('sample.db',check_same_thread=False)
     
 def create_tables():
-    #code such as : ModelName.create_table()
+    \'''code such as : ModelName.create_table()\'''
     
 class BaseModel(peewee.Model):
     class Meta:
@@ -32,6 +34,7 @@ class BaseModel(peewee.Model):
 def get_auto_view():
     auto = '''from bottle import run , debug , route
 from bottle import request , response , redirect , template
+import models
 import peewee
 
 #create your views 
@@ -87,7 +90,6 @@ def syncdb(dbname=None):
 def args_error():
     print "Usage : "
     print "\t options : %s " %(__OPTIONS__,)
-    print "\t python manage.py option [target]"
     return None
 
 #MAIN
