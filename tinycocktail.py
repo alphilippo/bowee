@@ -7,18 +7,15 @@ import pdb
 
 __PROJECT_DIR__ = os.getcwd()
 
-__DIRS__ = [
-    'templates',
-    'static_files'
-]
+__DIRS__ = ['templates','static_files']
 
-__OPTIONS__ = ['createproject','syncdb','run']
+__OPTIONS__ = ['project','syncdb','run']
 
 def get_auto_model():
     auto = '''import peewee
 #import db_driver
     
-#sample
+#Example with Sqlite database
 #database = peewee.SqliteDatabase('sample.db',check_same_thread=False)
     
 def create_tables():
@@ -27,6 +24,9 @@ def create_tables():
 class BaseModel(peewee.Model):
     class Meta:
         database = database
+
+if __name__ == '__main__'
+    create_tables()
     
 '''
     return auto
@@ -37,7 +37,13 @@ from bottle import request , response , redirect , template
 import models
 import peewee
 
-#create your views 
+#create your views
+
+@route('/')
+@route('/index')
+def index():
+    return "Hello World !!!"
+
 '''
     return auto
 
@@ -52,7 +58,6 @@ def create_project_dir(name):
     os.mkdir(os.path.join(__PROJECT_DIR__,name))
     return os.path.join(__PROJECT_DIR__,name)
 
-    
 def generate_files(name):
     print "Generating project files"
     for filename in __PROJECT_FILES__ :
@@ -79,12 +84,11 @@ def run(name='views.py'):
     
 def syncdb(dbname=None):
     try :
-        import models
-        models.create_tables()
+        call(['python','models.py'])
         return "tables successfully created"
-    except ImportError :
-        return "File models.py doesn't exist "
-
+    except :
+        pass
+        
 #ERROR HANDLER        
 
 def args_error():
@@ -95,8 +99,8 @@ def args_error():
 #MAIN
     
 if __name__ == '__main__':
-    #pdb.set_trace()
-    if len(sys.argv) >= 2 and sys.argv[1] == 'createproject' :
+    print __PROJECT_DIR__
+    if len(sys.argv) >= 2 and sys.argv[1] =='project' :
         try :
             name = create_project_dir(sys.argv[2])
             project = generate_files(name)
@@ -112,4 +116,4 @@ if __name__ == '__main__':
             run(sys.argv[2])
     else :
         args_error()
-        
+    
