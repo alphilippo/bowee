@@ -1,14 +1,29 @@
-Author = josuebrunel@gmail.com
+Author: Josue Kouka
+Title: TinyCocktail
+Date: 2012-11-15
+Summary: TinyCoktail
 
-Tinycocktail 0.1
+##What's __TinyCoktail__
 
-Small to help you generate a tinycocktail project
+***TinyCocktail*** is little python tool which helps people creating an architecture for **bottle** project.
 
-tinycocktail = bottle (framwork) + peewee (orm) + sqlite3 (database)
+It tries to use the [MVT](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) architecture, actually is more ***Model View Template*** like in [Django Framework](http://en.wikipedia.org/wiki/Django_(web_framework)).
+***TinyCocktail*** uses **peewee** as ORM. 
 
-Features :
--Project builder
--Import Handler
-so far
+##Installation
+
+
+
+##Requirements
+To be able to use ***TinyCocktail***, it's required to have at least installed:
+
+* Peewee 
+
+* SQLite  
+
+
+
+##Turorial
+
 
 
