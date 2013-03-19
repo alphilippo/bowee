@@ -1,0 +1,3 @@
+import bowee.bowee
+
+bowee.main()
