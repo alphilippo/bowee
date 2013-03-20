@@ -21,12 +21,24 @@ To be able to use ***BoWee***, it's required to have at least installed:
 ##Installation
 
 	:::console
-	yosue@loking:~$sudo pip install bowee
+
+	yosuke@loking:~$sudo pip install bowee
 
 ##Turorial
 
 	:::console
-	yosue@loking:~$bowee project test
+
+	yosuke@loking:~$bowee_admin project test
+	yosuke@loking:~$tree test
+	test/
+	├── __init__.py
+	├── models.py
+	├── static_files
+	├── templates
+	└── views.py
+
+	2 directories, 3 files
+
 
 
 

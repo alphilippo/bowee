@@ -6,11 +6,9 @@ setup(
     long_description='Bottle Project Builder',
     author='Josue Kouka',
     author_email='josuebrunel@gmail.com',
-    url='http://www.josuebrunel.org/',
+    url='https://github.com/josuebrunel/bowee',
     packages=['bowee'],
-    #py_modules=['tinycocktail'],
     platforms=['Any'],
     license='BSD',
-    scripts=['bowee_runner'],
-    
+    scripts=['bowee_admin.py'],
 )

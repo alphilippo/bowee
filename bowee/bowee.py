@@ -110,14 +110,14 @@ def args_error():
     
 def main(s=sys):
 
-    print __PROJECT_DIR__
+    #print __PROJECT_DIR__
     if len(s.argv) >= 2 and s.argv[1] =='project' :
         try :
             name = create_project_dir(s.argv[2])
             project = generate_files(name)
             template = create_template_dir(name)
         except :
-            print "Usage : createproject projectname"
+            print "Usage : project projectname"
     elif len(s.argv) == 2 and s.argv[1] == 'syncdb' :
         print syncdb()
     elif len(s.argv) >= 2 and s.argv[1] == 'run' :
@@ -130,3 +130,4 @@ def main(s=sys):
 
 if __name__ == '__main__':
     main(sys)
+
