@@ -29,10 +29,6 @@ Those packages can be installed like this:
 	:::console
 	yosuke@loking:~$sudo pip install bottle peewee
 
-##Download
-
-You can directly download **bowee** [here](./static_files/bowee/bowee-1.1.tar.gz) or check the [github repository](https://github.com/josuebrunel/bowee) to see the last updates.
-
 
 ##Installation
 
