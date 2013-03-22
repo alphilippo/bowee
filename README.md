@@ -1,14 +1,7 @@
-Title: Bowee
-Date: 2013-01-15
-Author: Josue Kouka
-Tags: python, bottle, peewee, web
-Category: Projects 
-Summary: Little Bottle project builder
-
 ##What's __BoWee__
 
 **BoWee** is a **bottle** project builder. It generates an project architecture and useful files to be abble for **bottle** projects.
-It was previously name _TinyCocktail_ , but it has been changed. 
+It was previously name ___TinyCocktail___ , but it has been changed. 
 
 It uses the [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) architecture. 
 Actually is more ***Model View Template*** architecture like in the [Django Framework](http://en.wikipedia.org/wiki/Django_(web_framework)).
@@ -28,10 +21,6 @@ Those packages can be installed like this:
 
 	:::console
 	yosuke@loking:~$sudo pip install bottle peewee
-
-##Download
-
-You can directly download **bowee** [here](./static_files/bowee/bowee-1.1.tar.gz) or check the [github repository](https://github.com/josuebrunel/bowee) to see the last updates.
 
 
 ##Installation

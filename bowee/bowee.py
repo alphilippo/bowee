@@ -25,7 +25,7 @@ class BaseModel(peewee.Model):
     class Meta:
         database = database
 
-if __name__ == '__main__'
+if __name__ == '__main__':
     create_tables()
     
 '''
@@ -91,7 +91,7 @@ def run(name='views.py'):
         pass
     
 #ORM MANAGER
-#Don't know it is still working    
+#Don't know if it is still working    
 def syncdb(dbname=None):
     try :
         call(['python','models.py'])
