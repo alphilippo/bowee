@@ -1,52 +1,26 @@
 #!/bin/python
 
-import sys
 import os.path
 from subprocess import call
+import argparse
+
+import contents
+
 import pdb
 
-import argparse
 
 PROJECT_DIR = os.getcwd()
 
-DIRS = ['templates','static_files']
+DIRS = ['templates','static']
 
 OPTIONS = ['project','syncdb','run']
 
 def get_auto_model():
-    auto = '''import peewee
-#import db_driver
-    
-#Example with Sqlite database
-#database = peewee.SqliteDatabase('sample.db',check_same_thread=False)
-    
-def create_tables():
-    \'''code such as : ModelName.create_table()\'''
-    
-class BaseModel(peewee.Model):
-    class Meta:
-        database = database
-
-if __name__ == '__main__':
-    create_tables()
-    
-'''
+    auto = contents.MODEL
     return auto
 
 def get_auto_view():
-    auto = '''from bottle import run , debug , route
-from bottle import request , response , redirect , template
-import models
-import peewee
-
-#create your views
-
-@route('/')
-@route('/index')
-def index():
-    return "Hello World !!!"
-
-'''
+    auto = contents.VIEW
     return auto
 
 PROJECT_FILES = [
