@@ -74,13 +74,6 @@ def syncdb(dbname=None):
         return "tables successfully created"
     except :
         pass
-        
-#ERROR HANDLER        
-
-def args_error():
-    print "Usage : "
-    print "\t options : %s " %(OPTIONS,)
-    return None
 
 #MAIN
     
