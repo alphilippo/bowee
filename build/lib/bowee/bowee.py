@@ -5,8 +5,6 @@ import os.path
 from subprocess import call
 import pdb
 
-import argparse
-
 __PROJECT_DIR__ = os.getcwd()
 
 __DIRS__ = ['templates','static_files']
@@ -110,37 +108,26 @@ def args_error():
 
 #MAIN
     
-# def main(s=sys):
+def main(s=sys):
 
-#     #print __PROJECT_DIR__
-#     if len(s.argv) >= 2 and s.argv[1] =='project' :
-#         try :
-#             name = create_project_dir(s.argv[2])
-#             project = generate_files(name)
-#             template = create_template_dir(name)
-#         except :
-#             print "Usage : project projectname"
-#     elif len(s.argv) == 2 and s.argv[1] == 'syncdb' :
-#         print syncdb()
-#     elif len(s.argv) >= 2 and s.argv[1] == 'run' :
-#         if len(s.argv) == 2 :
-#             run()
-#         else:
-#             run(s.argv[2])
-#     else :
-#         args_error()
-
-def main():
-    parser = argparse.ArgumentParser(description="Bottle project structure builder. Equivalent to django_admin.py")
-
-    parser.add_argument('project', help="Create project")
-    parser.add_argument('run', help="Launch server")
-    parser.add_argument('syncdb', help="Sync database")
-
-    args = vars(parser.parse_args())
-
-    print(args)
+    #print __PROJECT_DIR__
+    if len(s.argv) >= 2 and s.argv[1] =='project' :
+        try :
+            name = create_project_dir(s.argv[2])
+            project = generate_files(name)
+            template = create_template_dir(name)
+        except :
+            print "Usage : project projectname"
+    elif len(s.argv) == 2 and s.argv[1] == 'syncdb' :
+        print syncdb()
+    elif len(s.argv) >= 2 and s.argv[1] == 'run' :
+        if len(s.argv) == 2 :
+            run()
+        else:
+            run(s.argv[2])
+    else :
+        args_error()
 
 if __name__ == '__main__':
-    main()
+    main(sys)
 
