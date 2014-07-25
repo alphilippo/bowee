@@ -7,11 +7,11 @@ import pdb
 
 import argparse
 
-__PROJECT_DIR__ = os.getcwd()
+PROJECT_DIR = os.getcwd()
 
-__DIRS__ = ['templates','static_files']
+DIRS = ['templates','static_files']
 
-__OPTIONS__ = ['project','syncdb','run']
+OPTIONS = ['project','syncdb','run']
 
 def get_auto_model():
     auto = '''import peewee
@@ -49,7 +49,7 @@ def index():
 '''
     return auto
 
-__PROJECT_FILES__ = [
+PROJECT_FILES = [
     ('views.py',get_auto_view()),
     ('models.py',get_auto_model()),
     ('__init__.py',''),]
@@ -59,8 +59,8 @@ __PROJECT_FILES__ = [
 def create_project_dir(name):
     '''Create project directory
     '''
-    os.mkdir(os.path.join(__PROJECT_DIR__,name))
-    return os.path.join(__PROJECT_DIR__,name)
+    os.mkdir(os.path.join(PROJECT_DIR,name))
+    return os.path.join(PROJECT_DIR,name)
 
 def generate_files(name):
     '''Generates project files
@@ -68,7 +68,7 @@ def generate_files(name):
         -models.py
     '''
     print "Generating project files"
-    for filename in __PROJECT_FILES__ :
+    for filename in PROJECT_FILES :
         fname = os.path.join(name,filename[0])
         with open(fname,'w+') as f :
             f.write(filename[1])
@@ -80,7 +80,7 @@ def create_template_dir(name):
         -templates
         -static_files
     '''
-    for directory in __DIRS__ :
+    for directory in DIRS :
         os.mkdir(os.path.join(name,directory))
     return True
 
@@ -105,41 +105,32 @@ def syncdb(dbname=None):
 
 def args_error():
     print "Usage : "
-    print "\t options : %s " %(__OPTIONS__,)
+    print "\t options : %s " %(OPTIONS,)
     return None
 
 #MAIN
     
-# def main(s=sys):
-
-#     #print __PROJECT_DIR__
-#     if len(s.argv) >= 2 and s.argv[1] =='project' :
-#         try :
-#             name = create_project_dir(s.argv[2])
-#             project = generate_files(name)
-#             template = create_template_dir(name)
-#         except :
-#             print "Usage : project projectname"
-#     elif len(s.argv) == 2 and s.argv[1] == 'syncdb' :
-#         print syncdb()
-#     elif len(s.argv) >= 2 and s.argv[1] == 'run' :
-#         if len(s.argv) == 2 :
-#             run()
-#         else:
-#             run(s.argv[2])
-#     else :
-#         args_error()
-
 def main():
     parser = argparse.ArgumentParser(description="Bottle project structure builder. Equivalent to django_admin.py")
 
-    parser.add_argument('-p', '--project', action='store', help="Create project")
-    parser.add_argument('-r', '--run', action='store', help="Launch server")
-    parser.add_argument('-s', '--syncdb', action='store', help="Sync database")
+    parser.add_argument('-p', '--project', action='store', metavar=('projectname'), help="Create project")
+    parser.add_argument('-r', '--run', action='store_true', help="Launch server")
+    parser.add_argument('-s', '--syncdb', action='store_false', help="Sync database")
 
     args = vars(parser.parse_args())
-
-    print(args)
+    print(args) 
+    if args['project'] :
+        try:
+            name = create_project_dir(args['project'])
+            project = generate_files(name)
+            template = create_template_dir(name)
+        except Exception, e:
+            print(e)
+    elif args['syncdb'] :
+        try:
+            pass
+        except Exception, e:
+            print(e)
 
 if __name__ == '__main__':
     main()
