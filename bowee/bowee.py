@@ -133,9 +133,9 @@ def args_error():
 def main():
     parser = argparse.ArgumentParser(description="Bottle project structure builder. Equivalent to django_admin.py")
 
-    parser.add_argument('project', help="Create project")
-    parser.add_argument('run', help="Launch server")
-    parser.add_argument('syncdb', help="Sync database")
+    parser.add_argument('-p', '--project', action='store', help="Create project")
+    parser.add_argument('-r', '--run', action='store', help="Launch server")
+    parser.add_argument('-s', '--syncdb', action='store', help="Sync database")
 
     args = vars(parser.parse_args())
 
