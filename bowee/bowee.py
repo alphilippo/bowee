@@ -72,8 +72,9 @@ def syncdb(dbname=None):
     try :
         call(['python','models.py'])
         return "tables successfully created"
-    except :
-        pass
+    except Exception, e:
+        print(e)
+        
 
 #MAIN
     
@@ -82,10 +83,10 @@ def main():
 
     parser.add_argument('-p', '--project', action='store', metavar=('projectname'), help="Create project")
     parser.add_argument('-r', '--run', action='store_true', help="Launch server")
-    parser.add_argument('-s', '--syncdb', action='store_false', help="Sync database")
+    parser.add_argument('-s', '--syncdb', action='store_true', help="Sync database")
 
     args = vars(parser.parse_args())
-    print(args) 
+   
     if args['project'] :
         try:
             name = create_project_dir(args['project'])
@@ -95,7 +96,7 @@ def main():
             print(e)
     elif args['syncdb'] :
         try:
-            pass
+            syncdb()
         except Exception, e:
             print(e)
 
