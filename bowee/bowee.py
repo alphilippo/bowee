@@ -79,13 +79,14 @@ def syncdb(dbname=None):
 #MAIN
     
 def main():
-    parser = argparse.ArgumentParser(description="Bottle project structure builder. Equivalent to django_admin.py")
+    parser = argparse.ArgumentParser(description="Bottle project structure builder. Equivalent to django_admin.py", version='0.1')
 
     parser.add_argument('-p', '--project', action='store', metavar=('projectname'), help="Create project")
     parser.add_argument('-r', '--run', action='store_true', help="Launch server")
     parser.add_argument('-s', '--syncdb', action='store_true', help="Sync database")
 
     args = vars(parser.parse_args())
+    print(args)
    
     if args['project'] :
         try:
@@ -97,6 +98,11 @@ def main():
     elif args['syncdb'] :
         try:
             syncdb()
+        except Exception, e:
+            print(e)
+    else:
+        try:
+            call(['python','runserver.py'])
         except Exception, e:
             print(e)
 
